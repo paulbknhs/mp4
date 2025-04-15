@@ -1,0 +1,788 @@
+/* --- Modern CSS Revamp --- */
+
+/* 1. Root Variables & Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    /* Light Theme */
+    --bg-color-light: #f8f9fa; /* Slightly lighter gray */
+    --card-bg-light: #ffffff;
+    --text-color-light: #212529; /* Dark gray */
+    --text-muted-light: #6c757d; /* Medium gray */
+    --primary-color-light: #007bff; /* Standard Bootstrap Blue */
+    --primary-hover-light: #0056b3; /* Darker Blue */
+    --accent-color-light: #6ea8fe; /* Lighter blue accent */
+    --border-color-light: #dee2e6; /* Light gray border */
+    --shadow-color-light-rgb: 0, 0, 0;
+    --success-color-light: #198754; /* Bootstrap Green */
+    --error-color-light: #dc3545; /* Bootstrap Red */
+    --info-bg-light: #e0f3ff;
+    --success-bg-light: #d1e7dd;
+    --error-bg-light: #f8d7da;
+    --waveform-bg-light: #e9ecef; /* Background for waveform */
+
+    /* Dark Theme */
+    --bg-color-dark: #212529; /* Dark Gray */
+    --card-bg-dark: #343a40; /* Lighter Dark Gray */
+    --text-color-dark: #e9ecef; /* Light Gray text */
+    --text-muted-dark: #adb5bd; /* Medium Gray text */
+    --primary-color-dark: #0d6efd; /* Brighter Bootstrap Blue */
+    --primary-hover-dark: #0b5ed7; /* Slightly darker blue */
+    --accent-color-dark: #6ea8fe; /* Same accent */
+    --border-color-dark: #495057; /* Darker border */
+    --shadow-color-dark-rgb: 0, 0, 0;
+    --success-color-dark: #198754; /* Same green, stands out */
+    --error-color-dark: #dc3545; /* Same red */
+    --info-bg-dark: #0a2d45;
+    --success-bg-dark: #0c301a;
+    --error-bg-dark: #4d181f;
+    --waveform-bg-dark: #495057; /* Background for waveform */
+
+
+    /* Default to Light Theme */
+    --bg-color: var(--bg-color-light);
+    --card-bg: var(--card-bg-light);
+    --text-color: var(--text-color-light);
+    --text-muted: var(--text-muted-light);
+    --primary-color: var(--primary-color-light);
+    --primary-hover: var(--primary-hover-light);
+    --accent-color: var(--accent-color-light);
+    --border-color: var(--border-color-light);
+    --shadow-color-rgb: var(--shadow-color-light-rgb);
+    --success-color: var(--success-color-light);
+    --error-color: var(--error-color-light);
+    --info-bg: var(--info-bg-light);
+    --success-bg: var(--success-bg-light);
+    --error-bg: var(--error-bg-light);
+    --waveform-bg: var(--waveform-bg-light);
+
+    /* Shared Variables */
+    --border-radius-sm: 0.25rem; /* 4px */
+    --border-radius-md: 0.375rem; /* 6px */
+    --border-radius-lg: 0.5rem; /* 8px */
+    --shadow-sm: 0 1px 2px rgba(var(--shadow-color-rgb), 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(var(--shadow-color-rgb), 0.1), 0 2px 4px -2px rgba(var(--shadow-color-rgb), 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(var(--shadow-color-rgb), 0.1), 0 4px 6px -4px rgba(var(--shadow-color-rgb), 0.1);
+    --transition-speed: 0.2s;
+    --section-spacing: 2rem;
+}
+
+body {
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    line-height: 1.6;
+    font-size: 16px; /* Base font size */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.dark-mode {
+    --bg-color: var(--bg-color-dark);
+    --card-bg: var(--card-bg-dark);
+    --text-color: var(--text-color-dark);
+    --text-muted: var(--text-muted-dark);
+    --primary-color: var(--primary-color-dark);
+    --primary-hover: var(--primary-hover-dark);
+    --accent-color: var(--accent-color-dark);
+    --border-color: var(--border-color-dark);
+    --shadow-color-rgb: var(--shadow-color-dark-rgb); /* Keep shadow subtle in dark */
+    --success-color: var(--success-color-dark);
+    --error-color: var(--error-color-dark);
+    --info-bg: var(--info-bg-dark);
+    --success-bg: var(--success-bg-dark);
+    --error-bg: var(--error-bg-dark);
+    --waveform-bg: var(--waveform-bg-dark);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Visually hidden class for accessibility */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* Prevent content wrapping */
+}
+
+
+/* 2. Container & Layout */
+.container {
+    max-width: 800px; /* Slightly wider */
+    margin: var(--section-spacing) auto;
+    padding: 2rem 2.5rem;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+section {
+    margin-bottom: var(--section-spacing);
+}
+section:last-of-type {
+    margin-bottom: 0;
+}
+
+
+/* 3. Header & Theme Toggle */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+    margin-bottom: var(--section-spacing);
+    transition: border-color var(--transition-speed) ease;
+}
+
+header h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    transition: color var(--transition-speed) ease;
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+}
+.theme-switch-wrapper em {
+    margin-left: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: normal;
+}
+.theme-switch {
+    display: inline-block;
+    height: 24px;
+    position: relative;
+    width: 48px;
+}
+.theme-switch input { display: none; }
+.slider {
+    background-color: var(--text-muted); /* Use muted color for inactive */
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: background-color 0.3s ease;
+}
+.slider:before {
+    background-color: #fff; /* Always white handle background */
+    border: 1px solid var(--border-color);
+    bottom: 3px;
+    content: "";
+    height: 18px;
+    left: 3px;
+    position: absolute;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    width: 18px;
+}
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+input:checked + .slider:before {
+    transform: translateX(24px);
+    border-color: var(--primary-color);
+}
+.slider.round { border-radius: 24px; }
+.slider.round:before { border-radius: 50%; }
+
+/* Focus state for accessibility */
+.theme-switch input:focus-visible + .slider {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* 4. Upload Section */
+.upload-section {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background-color: var(--bg-color); /* Use main bg color */
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.upload-section:hover {
+    box-shadow: var(--shadow-sm);
+    border-color: var(--primary-color);
+}
+
+.upload-section input[type="file"] {
+    display: none;
+}
+.file-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    border: none;
+}
+.file-label:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+.file-label i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+.file-name-display {
+    display: block;
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: color var(--transition-speed) ease;
+    min-height: 1.2em; /* Prevent layout shift */
+}
+
+/* Focus state for file input label */
+.upload-section input[type="file"]:focus-visible + .file-name-display + .file-label {
+     outline: 2px solid var(--primary-color);
+     outline-offset: 2px;
+}
+
+
+/* 5. Controls Section */
+.controls-section {
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    transition: border-color var(--transition-speed) ease;
+    background-color: var(--bg-color); /* Add subtle background */
+}
+.controls-section h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+.control-group {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+.control-group:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.control-description {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    display: block;
+}
+.volume-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+}
+.volume-group label { /* Label specific styling */
+     margin-bottom: 0; /* Remove bottom margin when inline */
+     flex-shrink: 0;
+}
+
+/* Custom Range Slider Styles */
+#volumeSlider {
+    flex-grow: 1;
+    min-width: 150px; /* Ensure slider has min width */
+    max-width: 350px;
+    height: 8px; /* Slightly thicker track */
+    cursor: pointer;
+    appearance: none;
+    background: linear-gradient(to right, var(--primary-color) var(--value-percent, 50%), var(--border-color) var(--value-percent, 50%));
+    border-radius: var(--border-radius-sm);
+    outline: none;
+    opacity: 0.9;
+    transition: opacity var(--transition-speed) ease, background var(--transition-speed) ease;
+}
+#volumeSlider:hover {
+    opacity: 1;
+}
+/* Thumb Styles (WebKit/Blink) */
+#volumeSlider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid var(--card-bg); /* Border matching card background */
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition-speed) ease;
+    margin-top: -6px; /* Center thumb vertically */
+}
+/* Thumb Styles (Firefox) */
+#volumeSlider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid var(--card-bg);
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition-speed) ease;
+}
+/* Focus state for slider */
+#volumeSlider:focus-visible {
+     outline: 2px solid var(--primary-color);
+     outline-offset: 3px;
+}
+#volumeSlider:focus-visible::-webkit-slider-thumb {
+     background-color: var(--primary-hover);
+}
+#volumeSlider:focus-visible::-moz-range-thumb {
+     background-color: var(--primary-hover);
+}
+
+
+#volumeValue {
+    font-weight: 600;
+    min-width: 50px;
+    text-align: right;
+    color: var(--primary-color);
+    transition: color var(--transition-speed) ease;
+    font-variant-numeric: tabular-nums; /* Keep width consistent */
+}
+
+/* 6. Buttons */
+.btn {
+    padding: 10px 20px;
+    border: 1px solid transparent; /* Base border */
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    line-height: 1.5; /* Ensure consistent height */
+    box-shadow: var(--shadow-sm);
+    vertical-align: middle; /* Align buttons nicely if inline */
+}
+.btn:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+.btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+.btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: var(--shadow-md);
+}
+
+.btn:disabled {
+    background-color: var(--text-muted);
+    border-color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
+    cursor: not-allowed;
+    opacity: 0.65;
+    transform: none;
+    box-shadow: none;
+}
+
+.process-btn {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+.process-btn:hover {
+     background-color: #146c43; /* Darker green */
+     border-color: #146c43;
+}
+.process-btn:disabled {
+     background-color: #5cb85c; /* Lighter disabled green */
+     border-color: #5cb85c;
+     opacity: 0.65;
+}
+.process-btn:focus-visible {
+    outline-color: var(--success-color);
+}
+
+.download-area {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+.download-btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+}
+.download-btn i {
+    font-size: 1.1em;
+}
+
+
+/* 7. Preview Section */
+.preview-section {
+    margin-top: var(--section-spacing);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    transition: border-color var(--transition-speed) ease;
+}
+.preview-section h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+#videoPlayer {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border-radius: var(--border-radius-md);
+    background-color: #000;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    transition: border-color var(--transition-speed) ease;
+    aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+}
+
+/* Waveform Styles */
+.waveform-container {
+    min-height: 100px; /* Minimum height */
+    height: 120px; /* Default height */
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--waveform-bg); /* Specific background */
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden; /* Hide potential overflow */
+}
+.waveform-loading {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     color: var(--text-muted);
+     font-size: 0.9em;
+     padding: 1rem;
+     margin-top: 1rem;
+     min-height: 100px; /* Match waveform container */
+}
+.waveform-loading .spinner {
+     width: 30px;
+     height: 30px;
+     margin-bottom: 8px;
+}
+.waveform-loading.hidden,
+.waveform-container.hidden {
+     display: none !important;
+}
+
+
+/* 8. Status & Loading */
+.status-section {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem; /* More padding */
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-width: 1px;
+    border-style: solid;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.status-section.hidden {
+    display: none !important;
+}
+.status-section.error {
+    color: var(--error-color);
+    background-color: var(--error-bg);
+    border-color: var(--error-color);
+}
+.status-section.success {
+    color: var(--success-color);
+    background-color: var(--success-bg);
+    border-color: var(--success-color);
+}
+.status-section.info {
+     color: var(--text-muted);
+     background-color: var(--info-bg);
+     border-color: var(--primary-color); /* Use primary border for info */
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem 0;
+    color: var(--text-muted);
+    transition: color var(--transition-speed) ease;
+    min-height: 100px; /* Give it space */
+}
+.loading.hidden {
+    display: none !important;
+}
+.spinner {
+    border: 4px solid rgba(var(--text-color-rgb, 0, 0, 0), 0.1); /* Use text color with alpha */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-left-color: var(--primary-color); /* Primary color for spinner */
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+    transition: border-left-color var(--transition-speed) ease;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 9. History Section Styles */
+.history-section {
+    margin-top: var(--section-spacing);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    transition: border-color var(--transition-speed) ease;
+}
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem; /* More space below header */
+}
+.history-section h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    margin-bottom: 10px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.history-item:hover {
+    background-color: var(--card-bg);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+.history-item-info {
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow: hidden; /* Prevent text spilling */
+}
+.history-item-info strong {
+    display: block;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 3px;
+    word-break: break-all; /* Break long filenames */
+    font-size: 1rem;
+}
+.history-item-info span {
+    font-size: 0.85em;
+    color: var(--text-muted);
+    display: block; /* Ensure it takes its own line */
+}
+.history-item .btn-download-hist {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0; /* Prevent button shrinking */
+    border: 1px solid var(--primary-color); /* Match styling */
+}
+.history-item .btn-download-hist:hover {
+     background-color: var(--primary-hover);
+     border-color: var(--primary-hover);
+}
+.history-item .btn-download-hist:focus-visible {
+     outline-color: var(--primary-color);
+}
+
+.history-empty {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-style: italic;
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius-md);
+}
+.history-empty.hidden {
+    display: none;
+}
+
+/* Utility Button Styles */
+.btn-secondary {
+    background-color: var(--text-muted);
+    color: var(--card-bg); /* Contrast text */
+    border-color: var(--text-muted);
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+    color: #ffffff;
+}
+.btn-secondary:focus-visible {
+     outline-color: var(--text-muted);
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+.btn-small i {
+    margin-right: 5px;
+    font-size: 0.9em; /* Slightly smaller icon */
+}
+
+
+/* 10. Footer */
+footer {
+    margin-top: var(--section-spacing);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    transition: color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+footer p {
+    margin-bottom: 0.5rem;
+}
+footer strong {
+    color: var(--error-color);
+}
+
+
+/* 11. Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin: 1.5rem auto;
+        padding: 1.5rem 2rem;
+    }
+    header h1 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 1rem;
+        padding: 1rem 1.25rem;
+        border-radius: var(--border-radius-md);
+    }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .theme-switch-wrapper {
+        align-self: flex-end;
+    }
+    .upload-section {
+        padding: 1.5rem;
+    }
+    .controls-section {
+        padding: 1rem 1.25rem;
+    }
+    .control-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .volume-group {
+        flex-direction: column; /* Stack volume controls */
+        align-items: stretch;
+    }
+    #volumeSlider {
+        max-width: none;
+    }
+    #volumeValue {
+        text-align: left; /* Align left below slider */
+        margin-top: 5px; /* Adjust spacing */
+    }
+    .volume-group .btn { /* Ensure volume button is full width */
+        width: 100%;
+    }
+    .btn {
+        width: 100%; /* Make most buttons full width */
+        justify-content: center;
+    }
+    .file-label {
+        padding: 12px 20px;
+    }
+    .history-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .history-item-info {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .history-item .btn-download-hist {
+         width: 100%;
+         justify-content: center;
+         margin-top: 5px; /* Space above history download button */
+    }
+    .history-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+     #clearHistoryBtn {
+         align-self: flex-end;
+         width: auto; /* Don't make clear history full width */
+     }
+     footer {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+    }
+}
